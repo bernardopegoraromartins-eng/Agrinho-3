@@ -3,29 +3,625 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Agro Forte, Futuro Sustentável - Equilíbrio entre produção e meio ambiente">
-    <title>Agro Forte | Futuro Sustentável</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Agro Forte - Futuro Sustentável</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d6a4f;
+            --secondary-color: #52b788;
+            --accent-color: #f4a261;
+            --dark-color: #1b4332;
+            --light-color: #d8f3dc;
+            --text-color: #333;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        /* Navegação */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd200, #f7971e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 3px solid var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary-color);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .card:nth-child(1) .card-icon { background: var(--gradient-1); }
+        .card:nth-child(2) .card-icon { background: var(--gradient-2); }
+        .card:nth-child(3) .card-icon { background: var(--gradient-3); }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--gradient-1);
+            color: var(--white);
+            padding: 4rem 2rem;
+            margin: 3rem auto;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: countUp 2s ease;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Features */
+        .features {
+            background: var(--light-color);
+            padding: 5rem 2rem;
+            margin: 3rem 0;
+            border-radius: 30px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 0.3rem;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid,
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-circle {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--light-color);
+            border-top-color: var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
     <!-- Navegação -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
+    <nav id="navbar">
+        <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-leaf"></i>
-                <span>AgroForte</span>
+                AgroForte
             </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Início</a></li>
-                <li><a href="#sobre" class="nav-link">Sobre</a></li>
-                <li><a href="#tecnologias" class="nav-link">Tecnologias</a></li>
-                <li><a href="#sustentabilidade" class="nav-link">Sustentabilidade</a></li>
-                <li><a href="#impacto" class="nav-link">Impacto Social</a></li>
-                <li><a href="#contato" class="nav-link">Contato</a></li>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#tecnologias">Tecnologias</a></li>
+                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                <li><a href="#impacto">Impacto Social</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <div class="mobile-menu" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -34,463 +630,363 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero" id="inicio">
         <div class="hero-content">
-            <h1 class="hero-title animate-text">Agro Forte<br><span class="highlight">Futuro Sustentável</span></h1>
-            <p class="hero-subtitle">Equilíbrio entre produção e meio ambiente para as próximas gerações</p>
-            <div class="hero-buttons">
+            <h1>Agro Forte<br><span class="highlight">Futuro Sustentável</span></h1>
+            <p>Equilíbrio entre produção e meio ambiente para as próximas gerações</p>
+            <div class="cta-buttons">
                 <a href="#sustentabilidade" class="btn btn-primary">Conheça Nossas Práticas</a>
                 <a href="#tecnologias" class="btn btn-secondary">Tecnologias</a>
             </div>
         </div>
-        <div class="hero-overlay"></div>
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
     <!-- Sobre Section -->
-    <section id="sobre" class="section sobre">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Agro Forte, Futuro Sustentável</h2>
-                <p class="section-subtitle">Produzindo com alta eficiência sem degradar os recursos naturais</p>
+    <section id="sobre" class="fade-in">
+        <h2 class="section-title">Agro Forte, Futuro Sustentável</h2>
+        <p class="section-subtitle">Produzindo com alta eficiência sem degradar os recursos naturais</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Produção Sustentável</h3>
+                <p>Agricultura e pecuária que entregam alta produtividade mantendo o equilíbrio ambiental e preservando recursos para futuras gerações.</p>
             </div>
             
-            <div class="about-grid">
-                <div class="about-card" data-aos="fade-up">
-                    <div class="card-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3>Produção Sustentável</h3>
-                    <p>Agricultura e pecuária que entregam alta produtividade mantendo o equilíbrio ambiental e preservando recursos para futuras gerações.</p>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-recycle"></i>
                 </div>
-                
-                <div class="about-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon">
-                        <i class="fas fa-recycle"></i>
-                    </div>
-                    <h3>Economia Circular</h3>
-                    <p>Reaproveitamento de água, energia solar e práticas que reduzem desperdícios e maximizam a eficiência produtiva.</p>
-                </div>
-                
-                <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Tecnologia de Ponta</h3>
-                    <p>Drones, sensores e monitoramento digital para otimizar a produção e minimizar impactos ambientais.</p>
-                </div>
+                <h3>Economia Circular</h3>
+                <p>Reaproveitamento de água, energia solar e práticas que reduzem desperdícios e maximizam a eficiência produtiva.</p>
             </div>
-
-            <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="43">0</div>
-                    <div class="stat-label">Redução de Emissões até 2030</div>
+            
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="12">0</div>
-                    <div class="stat-label">Milhões de Hectares Reflorestados</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="972">0</div>
-                    <div class="stat-label">Milhões USD em Agro Sustentável</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="100">0</div>
-                    <div class="stat-label">Compromisso com Sustentabilidade</div>
-                </div>
+                <h3>Tecnologia de Ponta</h3>
+                <p>Drones, sensores e monitoramento digital para otimizar a produção e minimizar impactos ambientais.</p>
             </div>
         </div>
     </section>
 
-    <!-- Tecnologias Section -->
-    <section id="tecnologias" class="section tecnologias">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Tecnologias Inovadoras</h2>
-                <p class="section-subtitle">Soluções tecnológicas para um agro mais eficiente e sustentável</p>
+    <!-- Stats Section -->
+    <div class="stats fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="counter" data-target="43">0</h3>
+                <p>Redução de Emissões até 2030 (%)</p>
             </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="12">0</h3>
+                <p>Milhões de Hectares Reflorestados</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="972">0</h3>
+                <p>Milhões USD em Agro Sustentável</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="100">0</h3>
+                <p>Compromisso com Sustentabilidade (%)</p>
+            </div>
+        </div>
+    </div>
 
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-drone"></i>
-                    </div>
-                    <h3>Drones e Monitoramento</h3>
-                    <p>Monitoramento aéreo das plantações para identificar pragas, otimizar irrigação e evitar desperdícios de insumos.</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check"></i> Mapeamento preciso</li>
-                        <li><i class="fas fa-check"></i> Aplicação localizada</li>
-                        <li><i class="fas fa-check"></i> Redução de custos</li>
-                    </ul>
+    <!-- Tecnologias Section -->
+    <section id="tecnologias" class="features fade-in">
+        <h2 class="section-title">Tecnologias Inovadoras</h2>
+        <p class="section-subtitle">Soluções tecnológicas para um agro mais eficiente e sustentável</p>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <i class="fas fa-drone"></i>
+                <div>
+                    <h4>Drones e Monitoramento</h4>
+                    <p>Monitoramento aéreo das plantações para identificar pragas e otimizar irrigação.</p>
                 </div>
-
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-solar-panel"></i>
-                    </div>
-                    <h3>Energia Renovável</h3>
-                    <p>Uso de energia solar e biomassa para reduzir a dependência de combustíveis fósseis nas operações agrícolas.</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check"></i> Painéis solares</li>
-                        <li><i class="fas fa-check"></i> Biogás</li>
-                        <li><i class="fas fa-check"></i> Economia de energia</li>
-                    </ul>
+            </div>
+            
+            <div class="feature-item">
+                <i class="fas fa-solar-panel"></i>
+                <div>
+                    <h4>Energia Renovável</h4>
+                    <p>Uso de energia solar e biomassa para reduzir a dependência de combustíveis fósseis.</p>
                 </div>
-
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-tint"></i>
-                    </div>
-                    <h3>Gestão Hídrica Inteligente</h3>
-                    <p>Sistemas de irrigação por gotejamento e reaproveitamento de água da chuva para conservação dos recursos hídricos.</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check"></i> Irrigação precisa</li>
-                        <li><i class="fas fa-check"></i> Captação de chuva</li>
-                        <li><i class="fas fa-check"></i> Sensores de umidade</li>
-                    </ul>
+            </div>
+            
+            <div class="feature-item">
+                <i class="fas fa-tint"></i>
+                <div>
+                    <h4>Gestão Hídrica Inteligente</h4>
+                    <p>Sistemas de irrigação por gotejamento e reaproveitamento de água da chuva.</p>
                 </div>
-
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>Agricultura 4.0</h3>
-                    <p>IoT, big data e inteligência artificial para tomada de decisões baseadas em dados em tempo real.</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check"></i> Sensores IoT</li>
-                        <li><i class="fas fa-check"></i> Análise de dados</li>
-                        <li><i class="fas fa-check"></i> Automação</li>
-                    </ul>
+            </div>
+            
+            <div class="feature-item">
+                <i class="fas fa-microchip"></i>
+                <div>
+                    <h4>Agricultura 4.0</h4>
+                    <p>IoT, big data e inteligência artificial para tomada de decisões em tempo real.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sustentabilidade Section -->
-    <section id="sustentabilidade" class="section sustentabilidade">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Práticas Sustentáveis</h2>
-                <p class="section-subtitle">Métodos que preservam o meio ambiente enquanto produzem alimentos</p>
-            </div>
-
-            <div class="sustainability-tabs">
-                <button class="tab-btn active" data-tab="praticas">Práticas</button>
-                <button class="tab-btn" data-tab="beneficios">Benefícios</button>
-                <button class="tab-btn" data-tab="certificacoes">Certificações</button>
-            </div>
-
-            <div class="tab-content active" id="praticas">
-                <div class="practices-grid">
-                    <div class="practice-item">
-                        <div class="practice-number">01</div>
-                        <h3>Plantio Direto</h3>
-                        <p>Técnica que mantém a cobertura do solo, reduzindo erosão e melhorando a retenção de água e nutrientes.</p>
-                    </div>
-                    <div class="practice-item">
-                        <div class="practice-number">02</div>
-                        <h3>Rotação de Culturas</h3>
-                        <p>Alternância de culturas para melhorar a fertilidade do solo e quebrar ciclos de pragas e doenças.</p>
-                    </div>
-                    <div class="practice-item">
-                        <div class="practice-number">03</div>
-                        <h3>ILPF</h3>
-                        <p>Sistema Integrado Lavoura-Pecuária-Floresta que maximiza o uso da terra de forma sustentável.</p>
-                    </div>
-                    <div class="practice-item">
-                        <div class="practice-number">04</div>
-                        <h3>Bioinsumos</h3>
-                        <p>Uso de microrganismos benéficos e produtos biológicos para controle de pragas e nutrição vegetal.</p>
-                    </div>
+    <section id="sustentabilidade" class="fade-in">
+        <h2 class="section-title">Práticas Sustentáveis</h2>
+        <p class="section-subtitle">Métodos que preservam o meio ambiente enquanto produzem alimentos</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <i class="fas fa-tractor"></i>
                 </div>
+                <h3>Plantio Direto</h3>
+                <p>Técnica que mantém a cobertura do solo, reduzindo erosão e melhorando a retenção de água.</p>
             </div>
-
-            <div class="tab-content" id="beneficios">
-                <div class="benefits-container">
-                    <div class="benefit-card">
-                        <i class="fas fa-leaf"></i>
-                        <h3>Preservação Ambiental</h3>
-                        <p>Redução do desmatamento e conservação da biodiversidade</p>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-coins"></i>
-                        <h3>Eficiência Econômica</h3>
-                        <p>Redução de custos e aumento da produtividade a longo prazo</p>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-users"></i>
-                        <h3>Bem-Estar Social</h3>
-                        <p>Melhoria da qualidade de vida das comunidades rurais</p>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-globe-americas"></i>
-                        <h3>Segurança Alimentar</h3>
-                        <p>Produção de alimentos saudáveis para futuras gerações</p>
-                    </div>
+            
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
+                <h3>Rotação de Culturas</h3>
+                <p>Alternância de culturas para melhorar a fertilidade do solo e quebrar ciclos de pragas.</p>
             </div>
-
-            <div class="tab-content" id="certificacoes">
-                <div class="certifications-list">
-                    <div class="cert-item">
-                        <i class="fas fa-certificate"></i>
-                        <div>
-                            <h4>Programa Agro Brasil + Sustentável</h4>
-                            <p>Certificação governamental para práticas sustentáveis no agronegócio</p>
-                        </div>
-                    </div>
-                    <div class="cert-item">
-                        <i class="fas fa-award"></i>
-                        <div>
-                            <h4>Agricultura de Baixo Carbono</h4>
-                            <p>Plano ABC+ para redução de emissões de gases de efeito estufa</p>
-                        </div>
-                    </div>
-                    <div class="cert-item">
-                        <i class="fas fa-medal"></i>
-                        <div>
-                            <h4>Produção Orgânica Certificada</h4>
-                            <p>Selos de qualidade para produtos orgânicos e sustentáveis</p>
-                        </div>
-                    </div>
+            
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <i class="fas fa-tree"></i>
                 </div>
+                <h3>ILPF</h3>
+                <p>Sistema Integrado Lavoura-Pecuária-Floresta que maximiza o uso da terra.</p>
             </div>
         </div>
     </section>
 
     <!-- Impacto Social Section -->
-    <section id="impacto" class="section impacto">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Inovação e Impacto Social</h2>
-                <p class="section-subtitle">Transformando vidas e comunidades através da agricultura sustentável</p>
-            </div>
-
-            <div class="impact-grid">
-                <div class="impact-card large">
-                    <div class="impact-content">
-                        <h3>Educação no Campo</h3>
-                        <p>Programas de capacitação para agricultores familiares sobre práticas sustentáveis e tecnologias inovadoras.</p>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="stat-value">5000+</span>
-                                <span class="stat-desc">Agricultores Capacitados</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="stat-value">200+</span>
-                                <span class="stat-desc">Comunidades Atendidas</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="impact-image">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
+    <section id="impacto" class="fade-in">
+        <h2 class="section-title">Inovação e Impacto Social</h2>
+        <p class="section-subtitle">Transformando vidas e comunidades através da agricultura sustentável</p>
+        
+        <div class="cards-grid">
+            <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-
-                <div class="impact-card">
+                <h3 style="color: white;">Educação no Campo</h3>
+                <p style="color: rgba(255,255,255,0.9);">Programas de capacitação para agricultores familiares sobre práticas sustentáveis.</p>
+                <div style="margin-top: 1.5rem; font-size: 2rem; font-weight: 700;">
+                    5000+ <small style="font-size: 1rem; display: block; font-weight: 400;">Agricultores Capacitados</small>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                     <i class="fas fa-hand-holding-heart"></i>
-                    <h3>Inclusão Social</h3>
-                    <p>Apoio a pequenos produtores e agricultura familiar</p>
                 </div>
-
-                <div class="impact-card">
+                <h3>Inclusão Social</h3>
+                <p>Apoio a pequenos produtores e agricultura familiar com tecnologia e conhecimento.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                     <i class="fas fa-female"></i>
-                    <h3>Empoderamento Feminino</h3>
-                    <p>Fortalecimento das mulheres no agronegócio</p>
                 </div>
-
-                <div class="impact-card">
-                    <i class="fas fa-child"></i>
-                    <h3>Futuro das Gerações</h3>
-                    <p>Preservando recursos para nossos filhos</p>
-                </div>
-            </div>
-
-            <div class="testimonials">
-                <h3>O que dizem nossos parceiros</h3>
-                <div class="testimonial-slider" id="testimonialSlider">
-                    <div class="testimonial-item active">
-                        <p>"O agro sustentável mudou minha propriedade. Aumentei a produtividade e preservei o meio ambiente."</p>
-                        <div class="testimonial-author">
-                            <strong>Maria Silva</strong>
-                            <span>Agricultora Familiar</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Tecnologia e sustentabilidade andam juntas. Nossa fazenda é exemplo de produção responsável."</p>
-                        <div class="testimonial-author">
-                            <strong>João Pereira</strong>
-                            <span>Produtor Rural</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Investir em práticas sustentáveis é investir no futuro do nosso planeta e das próximas gerações."</p>
-                        <div class="testimonial-author">
-                            <strong>Ana Costa</strong>
-                            <span>Engenheira Agrônoma</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-controls">
-                    <button class="slider-btn prev" onclick="changeTestimonial(-1)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="slider-btn next" onclick="changeTestimonial(1)"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculadora de Pegada de Carbono -->
-    <section class="section calculadora">
-        <div class="container">
-            <div class="calculator-container">
-                <h2>Calcule sua Pegada de Carbono</h2>
-                <p>Descubra o impacto ambiental da sua propriedade e como reduzir</p>
-                
-                <form id="carbonCalculator" class="calculator-form">
-                    <div class="form-group">
-                        <label for="area">Área da Propriedade (hectares)</label>
-                        <input type="number" id="area" name="area" min="0" step="0.1" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="atividade">Atividade Principal</label>
-                        <select id="atividade" name="atividade" required>
-                            <option value="">Selecione...</option>
-                            <option value="lavoura">Lavoura</option>
-                            <option value="pecuaria">Pecuária</option>
-                            <option value="mista">Atividade Mista</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="energia">Uso de Energia Renovável</label>
-                        <select id="energia" name="energia" required>
-                            <option value="">Selecione...</option>
-                            <option value="sim">Sim</option>
-                            <option value="parcial">Parcial</option>
-                            <option value="nao">Não</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-calc">Calcular</button>
-                </form>
-                
-                <div id="calculatorResult" class="calculator-result" style="display: none;">
-                    <h3>Resultado da Análise</h3>
-                    <div class="result-content">
-                        <div class="result-item">
-                            <i class="fas fa-cloud"></i>
-                            <div>
-                                <span class="result-label">Emissão Estimada</span>
-                                <span class="result-value" id="emissaoValue">0 tCO₂e/ano</span>
-                            </div>
-                        </div>
-                        <div class="result-item">
-                            <i class="fas fa-arrow-down"></i>
-                            <div>
-                                <span class="result-label">Potencial de Redução</span>
-                                <span class="result-value" id="reducaoValue">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="result-recommendation" id="recommendation"></p>
-                </div>
+                <h3>Empoderamento Feminino</h3>
+                <p>Fortalecimento das mulheres no agronegócio com programas específicos de liderança.</p>
             </div>
         </div>
     </section>
 
     <!-- Contato Section -->
-    <section id="contato" class="section contato">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Entre em Contato</h2>
-                <p class="section-subtitle">Junte-se a nós na construção de um futuro sustentável</p>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Endereço</h4>
-                            <p>Av. da Sustentabilidade, 1000<br>Campo Verde - MT</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Telefone</h4>
-                            <p>(65) 99999-9999</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>contato@agroforte.com.br</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+    <section id="contato" class="fade-in">
+        <h2 class="section-title">Entre em Contato</h2>
+        <p class="section-subtitle">Junte-se a nós na construção de um futuro sustentável</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Endereço</h4>
+                        <p>Av. da Sustentabilidade, 1000<br>Campo Verde - MT</p>
                     </div>
                 </div>
-
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <input type="text" placeholder="Nome completo" required>
-                        <input type="email" placeholder="Email" required>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Telefone</h4>
+                        <p>(65) 99999-9999</p>
                     </div>
-                    <input type="text" placeholder="Assunto" required>
-                    <textarea placeholder="Sua mensagem" rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-                </form>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>contato@agroforte.com.br</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Horário de Atendimento</h4>
+                        <p>Seg - Sex: 8h às 18h</p>
+                    </div>
+                </div>
             </div>
+            
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="assunto">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">
+                    Enviar Mensagem <i class="fas fa-paper-plane" style="margin-left: 0.5rem;"></i>
+                </button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AgroForte</h3>
-                    <p>Comprometidos com um futuro sustentável e próspero para o agronegócio brasileiro.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#tecnologias">Tecnologias</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Links Úteis</h4>
-                    <ul>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">MAPA</a></li>
-                        <li><a href="#">Embrapa</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 AgroForte. Todos os direitos reservados. | Agro Forte, Futuro Sustentável</p>
-            </div>
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
+        <p>&copy; 2026 AgroForte. Todos os direitos reservados.</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">Agro Forte, Futuro Sustentável</p>
     </footer>
 
-    <!-- Botão Voltar ao Topo -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
 
-    <script src="script.js"></script>
+        // Mobile Menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target + (target === 100 || target === 43 ? '%' : target === 972 ? '' : '+');
+                }
+            });
+        };
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.querySelector('.counter')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                e.target.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        // Parallax effect on hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
 </body>
 </html>
