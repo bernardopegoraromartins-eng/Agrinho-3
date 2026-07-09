@@ -122,31 +122,20 @@
         /* Hero Section */
         .hero {
             margin-top: 80px;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            padding: 0;
+            min-height: 90vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 50%, rgba(240, 147, 251, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.3;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .hero-content {
@@ -154,12 +143,13 @@
             z-index: 1;
             max-width: 900px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             animation: fadeInUp 1s ease;
         }
 
@@ -247,7 +237,7 @@
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             color: var(--dark-color);
             position: relative;
             display: inline-block;
@@ -285,12 +275,21 @@
         .card {
             background: var(--white);
             border-radius: 20px;
-            padding: 2.5rem;
+            overflow: hidden;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
             border: 2px solid transparent;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 2rem;
         }
 
         .card::before {
@@ -350,6 +349,7 @@
             margin: 3rem auto;
             border-radius: 30px;
             box-shadow: var(--shadow);
+            max-width: 1200px;
         }
 
         .stats-grid {
@@ -376,6 +376,7 @@
             padding: 5rem 2rem;
             margin: 3rem 0;
             border-radius: 30px;
+            max-width: 1200px;
         }
 
         .feature-list {
@@ -405,6 +406,55 @@
             font-size: 1.5rem;
             color: var(--secondary-color);
             margin-top: 0.3rem;
+        }
+
+        /* Image Section */
+        .image-showcase {
+            margin: 4rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 300px;
+            box-shadow: var(--shadow);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-item:hover .showcase-overlay {
+            transform: translateY(0);
         }
 
         /* Contact */
@@ -651,27 +701,36 @@
         
         <div class="cards-grid">
             <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-seedling"></i>
+                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Produção Sustentável" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Produção Sustentável</h3>
+                    <p>Agricultura e pecuária que entregam alta produtividade mantendo o equilíbrio ambiental e preservando recursos para futuras gerações.</p>
                 </div>
-                <h3>Produção Sustentável</h3>
-                <p>Agricultura e pecuária que entregam alta produtividade mantendo o equilíbrio ambiental e preservando recursos para futuras gerações.</p>
             </div>
             
             <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-recycle"></i>
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Economia Circular" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Economia Circular</h3>
+                    <p>Reaproveitamento de água, energia solar e práticas que reduzem desperdícios e maximizam a eficiência produtiva.</p>
                 </div>
-                <h3>Economia Circular</h3>
-                <p>Reaproveitamento de água, energia solar e práticas que reduzem desperdícios e maximizam a eficiência produtiva.</p>
             </div>
             
             <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-chart-line"></i>
+                <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tecnologia de Ponta" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Tecnologia de Ponta</h3>
+                    <p>Drones, sensores e monitoramento digital para otimizar a produção e minimizar impactos ambientais.</p>
                 </div>
-                <h3>Tecnologia de Ponta</h3>
-                <p>Drones, sensores e monitoramento digital para otimizar a produção e minimizar impactos ambientais.</p>
             </div>
         </div>
     </section>
@@ -694,6 +753,35 @@
             <div class="stat-item">
                 <h3 class="counter" data-target="100">0</h3>
                 <p>Compromisso com Sustentabilidade (%)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Showcase -->
+    <div class="image-showcase fade-in">
+        <h2 class="section-title">Nossas Práticas no Campo</h2>
+        <p class="section-subtitle">Conheça um pouco do nosso trabalho em sustentabilidade agrícola</p>
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Agricultura Sustentável">
+                <div class="showcase-overlay">
+                    <h3>Agricultura de Precisão</h3>
+                    <p>Tecnologia aplicada ao campo</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Energia Solar">
+                <div class="showcase-overlay">
+                    <h3>Energia Renovável</h3>
+                    <p>Painéis solares nas propriedades</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1585314062644-58f13269c690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Reflorestamento">
+                <div class="showcase-overlay">
+                    <h3>Reflorestamento</h3>
+                    <p>Preservação ambiental</p>
+                </div>
             </div>
         </div>
     </div>
@@ -745,27 +833,36 @@
         
         <div class="cards-grid">
             <div class="card">
-                <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                    <i class="fas fa-tractor"></i>
+                <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plantio Direto" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>Plantio Direto</h3>
+                    <p>Técnica que mantém a cobertura do solo, reduzindo erosão e melhorando a retenção de água.</p>
                 </div>
-                <h3>Plantio Direto</h3>
-                <p>Técnica que mantém a cobertura do solo, reduzindo erosão e melhorando a retenção de água.</p>
             </div>
             
             <div class="card">
-                <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                    <i class="fas fa-exchange-alt"></i>
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rotação de Culturas" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Rotação de Culturas</h3>
+                    <p>Alternância de culturas para melhorar a fertilidade do solo e quebrar ciclos de pragas.</p>
                 </div>
-                <h3>Rotação de Culturas</h3>
-                <p>Alternância de culturas para melhorar a fertilidade do solo e quebrar ciclos de pragas.</p>
             </div>
             
             <div class="card">
-                <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                    <i class="fas fa-tree"></i>
+                <img src="https://images.unsplash.com/photo-1542601897-1e916184c91e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="ILPF" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>ILPF</h3>
+                    <p>Sistema Integrado Lavoura-Pecuária-Floresta que maximiza o uso da terra.</p>
                 </div>
-                <h3>ILPF</h3>
-                <p>Sistema Integrado Lavoura-Pecuária-Floresta que maximiza o uso da terra.</p>
             </div>
         </div>
     </section>
@@ -777,30 +874,38 @@
         
         <div class="cards-grid">
             <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                <div class="card-icon" style="background: rgba(255,255,255,0.2);">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3 style="color: white;">Educação no Campo</h3>
-                <p style="color: rgba(255,255,255,0.9);">Programas de capacitação para agricultores familiares sobre práticas sustentáveis.</p>
-                <div style="margin-top: 1.5rem; font-size: 2rem; font-weight: 700;">
-                    5000+ <small style="font-size: 1rem; display: block; font-weight: 400;">Agricultores Capacitados</small>
+                <div class="card-content">
+                    <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 style="color: white;">Educação no Campo</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Programas de capacitação para agricultores familiares sobre práticas sustentáveis.</p>
+                    <div style="margin-top: 1.5rem; font-size: 2rem; font-weight: 700;">
+                        5000+ <small style="font-size: 1rem; display: block; font-weight: 400;">Agricultores Capacitados</small>
+                    </div>
                 </div>
             </div>
             
             <div class="card">
-                <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <i class="fas fa-hand-holding-heart"></i>
+                <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Inclusão Social" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Inclusão Social</h3>
+                    <p>Apoio a pequenos produtores e agricultura familiar com tecnologia e conhecimento.</p>
                 </div>
-                <h3>Inclusão Social</h3>
-                <p>Apoio a pequenos produtores e agricultura familiar com tecnologia e conhecimento.</p>
             </div>
             
             <div class="card">
-                <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <i class="fas fa-female"></i>
+                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Empoderamento Feminino" class="card-image">
+                <div class="card-content">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <h3>Empoderamento Feminino</h3>
+                    <p>Fortalecimento das mulheres no agronegócio com programas específicos de liderança.</p>
                 </div>
-                <h3>Empoderamento Feminino</h3>
-                <p>Fortalecimento das mulheres no agronegócio com programas específicos de liderança.</p>
             </div>
         </div>
     </section>
@@ -985,7 +1090,7 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
         });
     </script>
 </body>
